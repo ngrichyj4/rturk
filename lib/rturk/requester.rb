@@ -46,9 +46,11 @@ module RTurk
 
         RTurk.logger.debug "Sending request:\n\t #{credentials.host}?#{querystring}"
         begin
-          response = "#{credentials.host}?#{querystring}"
-          RestClient.post(credentials.host, querystring) if !querystring.include? 'CreateHIT'
-          response if querystring.include? 'CreateHIT'
+          if querystring.include? 'CreateHIT'
+            RestClient.post(credentials.host, querystring)
+          else
+            response = "#{credentials.host}?#{querystring}"
+          end 
         rescue RestClient::Exception => e
           raise ServiceUnavailable if e.http_code == 503
           raise
