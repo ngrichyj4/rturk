@@ -12,6 +12,7 @@ module RTurk
     attr_reader :xml, :raw_xml
     
     def initialize(response)
+      return response if response.is_a?(String)
       @raw_xml = response.body
       @xml = Nokogiri::XML(@raw_xml)
       raise_errors
