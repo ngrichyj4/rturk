@@ -46,7 +46,7 @@ module RTurk
 
         RTurk.logger.debug "Sending request:\n\t #{credentials.host}?#{querystring}"
         begin
-          if querystring.include? 'CreateHIT'
+          if !querystring.include? 'CreateHIT'
             RestClient.post(credentials.host, querystring)
           else
             response = "#{credentials.host}?#{querystring}"
