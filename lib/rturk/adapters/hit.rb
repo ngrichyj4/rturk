@@ -25,7 +25,7 @@ module RTurk
     class << self
       def create(*args, &blk)
         response = RTurk::CreateHIT(*args, &blk)
-        response.is_a?(String) response : new(response.hit_id, response)
+        response.is_a?(String) ? response : new(response.hit_id, response)
       end
 
       # Find all the details for a HIT
